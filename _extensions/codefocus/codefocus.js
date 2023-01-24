@@ -1,14 +1,7 @@
-/*!
- * reveal-code-focus v1.1.0
- * Copyright 2015-2018 Benjamin Tan <https://bnjmnt4n.now.sh/>
- * Available under MIT license <https://github.com/bnjmnt4n/reveal-code-focus/blob/master/LICENSE>
- */
-;(function(window, Reveal, hljs) {
-  if (typeof window.RevealCodeFocus == 'function') {
-    return;
-  }
 
-  var currentSlide, currentFragmentsList, scrollToFocused = true, prevSlideData = null;
+window.RevealCodeFocus = function() {
+
+  var currentSlide, currentFragmentsList, prevSlideData = null;
 
   // Iterates through `array`, running `callback` for each `array` element.
   function forEach(array, callback) {
@@ -27,7 +20,6 @@
     }
     initialized = true;
 
-    parseCode();
 
     Reveal.addEventListener('slidechanged', updateCurrentSlide);
 
@@ -46,67 +38,6 @@
     updateCurrentSlide(e);
   }
 
-  // Highlight code and transform it into individual lines.
-  function parseCode() {
-    // TODO: mark as parsed.
-    forEach(document.querySelectorAll('pre code'), function(element) {
-      // Trim whitespace if the `data-trim` attribute is present.
-      if (element.hasAttribute('data-trim') && typeof element.innerHTML.trim == 'function') {
-        element.innerHTML = element.innerHTML.trim();
-      }
-
-      // Highlight code using highlight.js.
-      // TODO: avoid touching the element twice (when highlighting and generating lines).
-      hljs.highlightBlock(element);
-
-      // Split highlighted code into lines.
-      var openTags = [];
-      var reHtmlTag = /<(\/?)span(?:\s+(?:class=(['"])hljs-.*?\2)?\s*|\s*)>/g;
-
-      // Ensure that last line ends in a newline as our line-splitting algorithm
-      // requires lines to end in new lines.
-      var html = element.innerHTML;
-      if (html.charCodeAt(html.length - 1) != 10) {
-        html += '\n';
-      }
-
-      element.innerHTML = html.replace(/(.*?)\r?\n/g, function(_, string) {
-        if (!string) {
-          return '<span class=line>&nbsp;</span>';
-        }
-
-        var openTag, stringPrepend;
-
-        // Re-open all tags that were previously closed.
-        if (openTags.length) {
-          stringPrepend = openTags.join('');
-        }
-
-        // Match all HTML `<span>` tags.
-        reHtmlTag.lastIndex = 0;
-        while (openTag = reHtmlTag.exec(string)) {
-          // If it is a closing tag, remove the opening tag from the list.
-          if (openTag[1]) {
-            openTags.pop();
-          }
-          // Otherwise if it is an opening tag, push it to the list.
-          else {
-            openTags.push(openTag[0]);
-          }
-        }
-
-        // Close all opened tags, so that strings can be wrapped with `span.line`.
-        if (openTags.length) {
-          string += Array(openTags.length + 1).join('</span>');
-        }
-        if (stringPrepend) {
-          string = stringPrepend + string;
-        }
-
-        return '<span class=line>' + string + '</span>';
-      });
-    });
-  }
 
   function updateCurrentSlide(e) {
     currentSlide = e.currentSlide;
@@ -195,7 +126,6 @@
         }
       });
 
-      var topLineNumber, bottomLineNumber;
 
       function focusLine(lineNumber) {
         // Convert from 1-based index to 0-based index.
@@ -208,47 +138,23 @@
 
         line.classList.add('focus');
 
-        if (scrollToFocused) {
-          if (topLineNumber == null) {
-            topLineNumber = bottomLineNumber = lineNumber;
-          } else {
-            if (lineNumber < topLineNumber) {
-              topLineNumber = lineNumber;
-            }
-            if (lineNumber > bottomLineNumber) {
-              bottomLineNumber = lineNumber;
-            }
-          }
-        }
+        
       }
 
-      // TODO: avoid touching the DOM layout properties multiple times for each fragment
-      if (scrollToFocused && topLineNumber != null) {
-        var topLine =  code[topLineNumber];
-        var bottomLine = code[bottomLineNumber];
-        var codeParent = topLine.parentNode;
-        var scrollTop = topLine.offsetTop;
-        var scrollBottom = bottomLine.offsetTop + bottomLine.clientHeight;
-        codeParent.scrollTop = scrollTop - (codeParent.clientHeight - (scrollBottom - scrollTop)) / 2;
-      }
+
     });
   }
 
-  function RevealCodeFocus(options) {
-    if (!options) {
-      options = { 'scrollToFocused': true };
-    }
-
-    if (options.scrollToFocused != null) {
-      scrollToFocused = options.scrollToFocused;
-    }
-
-    if (Reveal.isReady()) {
-      initialize({ 'currentSlide': Reveal.getCurrentSlide() });
-    } else {
-      Reveal.addEventListener('ready', initialize);
+  return {
+    id: "code-focus", 
+    init: function(){
+      if (Reveal.isReady()) {
+        initialize({ 'currentSlide': Reveal.getCurrentSlide() });
+      } else {
+        Reveal.addEventListener('ready', initialize);
+      }
     }
   }
 
-  window.RevealCodeFocus = RevealCodeFocus;
-}(this, this.Reveal, this.hljs));
+  
+};
