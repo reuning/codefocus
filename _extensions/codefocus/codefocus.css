@@ -1,0 +1,9 @@
+/* TODO: CSS for plugin */
+.reveal .slides section .fragment.current-only {
+    opacity: 1;
+    visibility: visible;
+    display: none;
+  }
+  .reveal .slides section .fragment.current-only.current-fragment {
+    display: block;
+  }

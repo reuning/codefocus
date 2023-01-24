@@ -1,0 +1,49 @@
+---
+title: "Codefocus Example"
+format:
+  revealjs: default
+revealjs-plugins:
+  - codefocus
+---
+
+# In the morning
+
+```{r}
+#| echo: true
+vector <- c(1,2,3)
+sum(vector)
+```
+
+::: {.fragment .current-only data-code-focus="1"}
+When this fragment is shown, the first line of code will have the `focus` class added to it and it gets highlighted.
+:::
+
+::: {.fragment .current-only data-code-focus="1-2"}
+ Another fragment. This time, both lines will now have the `focus` class.
+:::
+
+## Slide two 
+```{r}
+#| echo: true
+a <- 1
+b <- 2
+c <- 1 + 2
+```
+and, 
+
+```{r}
+#| echo: true
+print(c)
+```
+
+::: {.fragment .current-only data-code-focus="1-2"}
+Here we have declared two variables
+:::
+
+::: {.fragment .current-only data-code-focus="3"}
+Then added them and passed them to c
+:::
+
+::: {.fragment data-code-focus="1" data-code-block="2"}
+Then print the c
+:::
