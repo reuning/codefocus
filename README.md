@@ -19,6 +19,7 @@ If you want to highlight and explain specific pieces of code as you go through i
 
 
 ````
+---
 title: "Codefocus Example"
 format:
   revealjs: default
