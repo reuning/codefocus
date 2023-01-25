@@ -4,7 +4,6 @@ This extension is a (jankily made) implementation of [reveal-code-focus](https:/
 
 ## Installing
 
-
 ```bash
 quarto add reuning/codefocus
 ```
