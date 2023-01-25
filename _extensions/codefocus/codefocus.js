@@ -51,6 +51,15 @@ window.RevealCodeFocus = function() {
       ).push(fragment);
     });
 
+    if(currentFragmentsList.length ){
+
+      var preElems = currentSlide.querySelectorAll('pre code');
+      forEach(preElems, function(pre){
+      /* Added in from highlight-lines.js */ 
+      pre.parentNode.classList.add("code-wrapper")
+      pre.classList.add("has-line-highlights");
+      });
+    }
     clearPreviousFocus();
 
     // If moving back to a previous slide…
@@ -80,8 +89,8 @@ window.RevealCodeFocus = function() {
 
   // Removes any previously focused lines.
   function clearPreviousFocus() {
-    forEach(currentSlide.querySelectorAll('pre code .line.focus'), function(line) {
-      line.classList.remove('focus');
+    forEach(currentSlide.querySelectorAll('pre.code-wrapper span.highlight-line.code-focus'), function(line) {
+      line.classList.remove('highlight-line');
     });
   }
 
@@ -102,16 +111,21 @@ window.RevealCodeFocus = function() {
         codeBlock = 1;
       }
 
-      var preElems = currentSlide.querySelectorAll('pre');
+      var preElems = currentSlide.querySelectorAll('pre code');
       if (!preElems.length) {
         return;
       }
 
+
+
       var pre = preElems[codeBlock - 1];
-      var code = pre.querySelectorAll('code .line');
+
+
+      var code = pre.querySelectorAll('span[id^="cb"]');
       if (!code.length) {
         return;
       }
+
 
       forEach(lines.split(','), function(line) {
         lines = line.split('-');
@@ -136,7 +150,7 @@ window.RevealCodeFocus = function() {
           return;
         }
 
-        line.classList.add('focus');
+        line.classList.add('highlight-line', 'code-focus');
 
         
       }
@@ -144,6 +158,7 @@ window.RevealCodeFocus = function() {
 
     });
   }
+
 
   return {
     id: "code-focus", 

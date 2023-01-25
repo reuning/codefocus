@@ -1,4 +1,3 @@
-/* TODO: CSS for plugin */
 .reveal .slides section .fragment.current-only {
     opacity: 1;
     visibility: visible;
@@ -7,3 +6,4 @@
   .reveal .slides section .fragment.current-only.current-fragment {
     display: block;
   }
+
