@@ -10,13 +10,24 @@ quarto add reuning/codefocus
 ```
 
 This will install the extension under the `_extensions` subdirectory.
-If you're using version control, you will want to check in this directory.
+If you're using version control, you will want to check in this directory. 
 
 ## Using
 
 If you want to highlight and explain specific pieces of code as you go through it you'll include the explanations in `fragments` under the code. For example:
 
-````{r}
+
+````
+title: "Codefocus Example"
+format:
+  revealjs: default
+revealjs-plugins:
+  - codefocus
+execute:
+  echo: true
+---
+
+```{r}
 vector <- c(1,2,3)
 vector <- sample(vector)
 sum(vector)
