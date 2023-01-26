@@ -2,7 +2,7 @@
 
 This extension is a (jankily made) implementation of [reveal-code-focus](https://github.com/bnjmnt4n/reveal-code-focus). I stripped somethings out of it, and then tried to make sure it would still work with the original line-highlight plugin. 
 
-See [the demo](example.html).
+See [the demo](https://reuning.github.io/codefocus/example.html).
 
 ## Installing
 
@@ -44,7 +44,7 @@ In addition, `.current-only` will make the fragment disappear when you move into
 
 ## Example
 
-Here is the source code for a minimal example: [example.qmd](example.qmd) and the [Revealjs presentation](example.html)
+Here is the source code for a minimal example: [example.qmd](example.qmd) and the [Revealjs presentation](https://reuning.github.io/codefocus/example.html)
 
 Thanks also to [shafayetShafee](https://github.com/shafayetShafee/codefocus).
 
