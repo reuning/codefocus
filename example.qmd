@@ -9,7 +9,7 @@ execute:
 embed-resources: true
 ---
 
-# Slide One
+## Slide One
 
 ```{r}
 vector <- c(1,2,3)
@@ -60,3 +60,23 @@ a <- 1
 b <- 2
 c <- 1 + 2
 ```
+
+
+## Test 1
+
+Should be normal
+```{r}
+df <- data.frame(x=1)
+df
+```
+. . .
+
+Should be normal
+
+```{.r}
+df <- data.frame(x=1)
+```
+
+## Test 2
+
+Another slide

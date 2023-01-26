@@ -47,4 +47,3 @@ In addition, `.current-only` will make the fragment disappear when you move into
 Here is the source code for a minimal example: [example.qmd](example.qmd) and the [Revealjs presentation](https://reuning.github.io/codefocus/example.html)
 
 Thanks also to [shafayetShafee](https://github.com/shafayetShafee/codefocus).
-

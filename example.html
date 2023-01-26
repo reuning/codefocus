@@ -1219,9 +1219,8 @@ margin-right: 0; }
 </div>
 
 </section>
-<section>
-<section id="slide-one" class="title-slide slide level1 center">
-<h1>Slide One</h1>
+<section id="slide-one" class="slide level2">
+<h2>Slide One</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>vector <span class="ot">&lt;-</span> <span class="fu">sample</span>(vector)</span>
@@ -1270,10 +1269,30 @@ margin-right: 0; }
 <div class="sourceCode" id="cb6" data-code-line-numbers="1,3|2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>c <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="test-1" class="slide level2">
+<h2>Test 1</h2>
+<p>Should be normal</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x
+1 1</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Should be normal</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="test-2" class="slide level2">
+<h2>Test 2</h2>
+<p>Another slide</p>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -1848,12 +1867,23 @@ window.RevealCodeFocus = function() {
 
     if(currentFragmentsList.length ){
 
-      var preElems = currentSlide.querySelectorAll('pre code');
-      forEach(preElems, function(pre){
-      /* Added in from highlight-lines.js */ 
-      pre.parentNode.classList.add("code-wrapper")
-      pre.classList.add("has-line-highlights");
+      /* Check if using codefocus */
+      var codeFocusSlide = 0;
+      forEach(currentFragmentsList, function(fragment){
+        if(fragment.hasAttribute('data-code-focus')){
+          codeFocusSlide = 1;
+        }
       });
+
+      if(codeFocusSlide){
+        var preElems = currentSlide.querySelectorAll('pre code');
+        forEach(preElems, function(pre){
+        /* Added in from highlight-lines.js */ 
+        pre.parentNode.classList.add("code-wrapper");
+        pre.classList.add("has-line-highlights");
+        });
+      };
+
     }
     clearPreviousFocus();
 

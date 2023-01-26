@@ -53,12 +53,23 @@ window.RevealCodeFocus = function() {
 
     if(currentFragmentsList.length ){
 
-      var preElems = currentSlide.querySelectorAll('pre code');
-      forEach(preElems, function(pre){
-      /* Added in from highlight-lines.js */ 
-      pre.parentNode.classList.add("code-wrapper")
-      pre.classList.add("has-line-highlights");
+      /* Check if using codefocus */
+      var codeFocusSlide = 0;
+      forEach(currentFragmentsList, function(fragment){
+        if(fragment.hasAttribute('data-code-focus')){
+          codeFocusSlide = 1;
+        }
       });
+
+      if(codeFocusSlide){
+        var preElems = currentSlide.querySelectorAll('pre code');
+        forEach(preElems, function(pre){
+        /* Added in from highlight-lines.js */ 
+        pre.parentNode.classList.add("code-wrapper");
+        pre.classList.add("has-line-highlights");
+        });
+      };
+
     }
     clearPreviousFocus();
 
