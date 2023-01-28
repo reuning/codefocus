@@ -56,7 +56,7 @@ window.RevealCodeFocus = function() {
       /* Check if using codefocus */
       var codeFocusSlide = 0;
       forEach(currentFragmentsList, function(fragment){
-        if(fragment.hasAttribute('data-code-focus')){
+        if(fragment[0].hasAttribute('data-code-focus')){
           codeFocusSlide = 1;
         }
       });
