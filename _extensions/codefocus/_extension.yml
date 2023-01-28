@@ -1,6 +1,6 @@
 title: CodeFocus
 author: Kevin Reuning
-version: 0.7.0
+version: 0.7.1
 quarto-required: ">=1.2.0"
 contributes:
   revealjs-plugins:
